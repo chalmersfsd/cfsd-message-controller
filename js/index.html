@@ -26,12 +26,26 @@ DEALINGS IN THE SOFTWARE.
         <!-- Load libcluon. -->
         <script src="libcluon-v0.0.104.js"></script>
     </head>
+    
+    <h1>Load a setting file</h1>
+
+    <input id="checkbox-msgbrake" type="checkbox" name="msgBrake" value="brake" onchange="doalert(this)"> Brake:
+    <input id="text-brakevalue" type="text" name="brakevalue" value="0">frequency:
+    <input id="text-brakefps" type="text" name="brakefps" value="33"><br>
+
+
 <body>
 
 <script>
     // "Instantiate" libcluon.
     var __libcluon = libcluon();
-
+    function doalert(checkboxElem) {
+        if (checkboxElem.checked) {
+            alert ("hi");
+        } else {
+            alert ("bye");
+        }
+    }
     // Function to load data from a remote destination.
     function getResourceFrom(url) {
         var xmlHttp = new XMLHttpRequest();
@@ -45,10 +59,15 @@ DEALINGS IN THE SOFTWARE.
         // Read data in binary from the WebSocket, channel "od4".
         var ws = new WebSocket("ws://" + window.location.host + "/", "od4");
         ws.binaryType = 'arraybuffer';
-
+        
         ws.onopen = function() {
             console.log("Connected.");
-
+            if (document.getElementById("checkbox-msgbrake").checked){
+                console.log("checked");
+            }else{
+                console.log("not checked")
+            }
+            
             // Load the ODVD message specification file to have information about the messages to decode and encode.
             var odvdMessageSpecificationFile = getResourceFrom("example.odvd");
             console.log("Loaded " + __libcluon.setMessageSpecification(odvdMessageSpecificationFile) + " messages from specification.");
