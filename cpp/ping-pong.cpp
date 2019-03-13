@@ -45,12 +45,22 @@ int32_t main(int32_t argc, char **argv) {
                 std::cout << "Brake Position: " << p.position()<< std::endl;
             }else{
                 std::cout <<env.senderStamp()<< "?? Position: " << p.position()<< std::endl;
-
             }
         };
         od4.dataTrigger(opendlv::proxy::PedalPositionReading::ID(), onPedalPositionReading);
 
-        
+        auto SwitchStateReading = [](cluon::data::Envelope &&env){
+            opendlv::proxy::SwitchStateReading p = cluon::extractMessage<opendlv::proxy::SwitchStateReading>(std::move(env));
+            if(env.senderStamp() == 1924){
+                std::cout << "dlStatus: " << p.state()<< std::endl;
+            }else if (env.senderStamp() == 1407){
+                std::cout << "resStatus: " << p.state()<< std::endl;
+            }else{
+                std::cout <<env.senderStamp()<< " status: " << p.state()<< std::endl;
+            }
+        };
+        od4.dataTrigger(opendlv::proxy::SwitchStateReading::ID(), SwitchStateReading);
+
         // Now, we define a time-triggered sending lambda.
         uint32_t counter{0};
         auto ping = [&od4, &counter](){
