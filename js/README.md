@@ -1,4 +1,32 @@
+# cfsd-Message-controller
+
+This project is a message controller for sending arbitrary messages by a web interface.
+
+There are two ways of sending messages:
+
+1. send once
+2. send under a certain frequency
+
+Build:
+
+```
+docker build -t cfsd-message-controller:v0.0.0 -f Dockerfile.amd64 .
+```
+
+Run:
+
+```
+docker run --rm -ti --net=host cluon-js-js:v0.0.0 -cid=111
+```
+
+open in web browser: localhost:8082
+
+
+
+The project is following project: Cluon-javascript-js :
+
 # cluon-javascript-js
+
 This sub-project contains the JavaScript part of the JavaScript--C++ communication demo.
 
 ## Table of Contents

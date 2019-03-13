@@ -16,5 +16,5 @@
 FROM chalmersrevere/opendlv-ui-server-amd64:v0.0.8
 MAINTAINER Christian Berger "christian.berger@gu.se"
 
-ADD . /opt/cluon-javascript-example
-ENTRYPOINT ["/usr/bin/opendlv-ui-server", "--http-root=/opt/cluon-javascript-example", "--port=8082"]
+ADD . /opt/cfsd-message-controller
+ENTRYPOINT ["/usr/bin/opendlv-ui-server", "--http-root=/opt/cfsd-message-controller", "--port=8082"]

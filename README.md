@@ -1,4 +1,34 @@
+# cfsd-Message-controller
+
+This project is a message controller for sending arbitrary messages by a web interface.
+
+There are two ways of sending messages:
+
+1. send once
+2. send under a certain frequency
+
+Build:
+
+```
+docker build -t cfsd-message-controller:v0.0.0 -f Dockerfile.amd64 .
+```
+
+Run:
+
+```
+docker run --rm -ti --net=host cluon-js-js:v0.0.0 -cid=111
+```
+
+open in web browser: localhost:8082
+
+
+
+The project is following project: Cluon-javascript:
+
+
+
 # cluon-javascript
+
 This project provides a minimum viable product (MVP) demonstrating how to communicate between JavaScript and [OD4Sessions](https://github.com/chalmers-revere/opendlv) using [libcluon](https://github.com/chrberger/libcluon) and hence, connecting JavaScript and C++ to exchange data bi-directionally.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT) [![x86_64/js](https://img.shields.io/badge/js-x86_64-blue.svg)](https://hub.docker.com/r/chrberger/cluon-javascript-js-amd64/tags/) [![x86_64/cpp](https://img.shields.io/badge/cpp-x86_64-blue.svg)](https://hub.docker.com/r/chrberger/cluon-javascript-cpp-amd64/tags/) [![armhf/js](https://img.shields.io/badge/js-armhf-blue.svg)](https://hub.docker.com/r/chrberger/cluon-javascript-js-armhf/tags/) [![armhf/cpp](https://img.shields.io/badge/cpp-armhf-blue.svg)](https://hub.docker.com/r/chrberger/cluon-javascript-cpp-armhf/tags/)

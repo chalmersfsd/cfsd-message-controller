@@ -73,35 +73,35 @@ DEALINGS IN THE SOFTWARE.
             // Got new data from the WebSocket; now, try to decode it into JSON using the supplied message specification file.
             var data = JSON.parse(__libcluon.decodeEnvelopeToJSON(evt.data));
             console.log(data);
+            //sample of encoding/decoding/send data
+            // // Check for message ID 2221...
+            // if (data.dataType == 2221) {
+            //     // found message. Now, extract values from the fields and do something with the data...
+            //     var number = data.example_Ping.number * 1.1;
 
-            // Check for message ID 2221...
-            if (data.dataType == 2221) {
-                // found message. Now, extract values from the fields and do something with the data...
-                var number = data.example_Ping.number * 1.1;
+            //     var textInBase64 = data.example_Ping.text;
+            //     var textDecodedFromBase64 = window.atob(textInBase64);
+            //     var textReversed = textDecodedFromBase64.split('').reverse().join('');
 
-                var textInBase64 = data.example_Ping.text;
-                var textDecodedFromBase64 = window.atob(textInBase64);
-                var textReversed = textDecodedFromBase64.split('').reverse().join('');
+            //     // ...and reply with message ID 2222.
+            //     {
+            //         var replyTextInBase64 = window.btoa(textReversed);
+            //         var replyInJSON = "{\"text\":\"" + replyTextInBase64 + "\",\"number\":" + number  + "}";
 
-                // ...and reply with message ID 2222.
-                {
-                    var replyTextInBase64 = window.btoa(textReversed);
-                    var replyInJSON = "{\"text\":\"" + replyTextInBase64 + "\",\"number\":" + number  + "}";
+            //         // Transform JSON response into binary Protobuf-encoded data...
+            //         const MESSAGE_ID = 2222;
+            //         const SENDER_STAMP = 0; // If you have multiple messages of the same type that you want to distinguish at the receiver, simply set the SENDER_STAMP to different values.
+            //         var replyInProtobuf = __libcluon.encodeEnvelopeFromJSONWithoutTimeStamps(replyInJSON, MESSAGE_ID, SENDER_STAMP);
 
-                    // Transform JSON response into binary Protobuf-encoded data...
-                    const MESSAGE_ID = 2222;
-                    const SENDER_STAMP = 0; // If you have multiple messages of the same type that you want to distinguish at the receiver, simply set the SENDER_STAMP to different values.
-                    var replyInProtobuf = __libcluon.encodeEnvelopeFromJSONWithoutTimeStamps(replyInJSON, MESSAGE_ID, SENDER_STAMP);
+            //         // convert into uint8 array buffer...
+            //         strToAB = str =>
+            //          new Uint8Array(str.split('')
+            //            .map(c => c.charCodeAt(0))).buffer;
 
-                    // convert into uint8 array buffer...
-                    strToAB = str =>
-                     new Uint8Array(str.split('')
-                       .map(c => c.charCodeAt(0))).buffer;
-
-                    // and send via the websocket.
-                    ws.send(strToAB(replyInProtobuf), { binary: true });
-                }
-            }
+            //         // and send via the websocket.
+            //         ws.send(strToAB(replyInProtobuf), { binary: true });
+            //     }
+            // }
         };
 
         ws.onclose = function() {
@@ -162,7 +162,7 @@ DEALINGS IN THE SOFTWARE.
         // and send via the websocket.
         ws.send(strToAB(replyInProtobuf), { binary: true });
     }
-    
+    // Global time trigger element. OnBtnPlay start, OnBtnStop stop
     var msgTimetrigger;
 
     function OnBtnPlay(elm){
