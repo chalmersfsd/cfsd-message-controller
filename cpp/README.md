@@ -14,7 +14,7 @@ using the ODVD message specification from [libcluon](https://github.com/chrberge
 to send a message from a C++ program via websockets to JavaScript. In a JavaScript
 application, this message is received, unpacked, and responded to.
 
-The first step is define the message; here, we use the file `example.odvd` in this
+The first step is define the message; here, we use the file `opendlv-standard-message-set-v0.9.7.odvd` in this
 folder on the folder `js`. Apparently, these message files must match - otherwise,
 the encoding and decoding of the messages will fail.
 
@@ -40,10 +40,10 @@ compiler. The `cluon-msc` tool depends on pthreads on Linux.
 g++ -DHAVE_CLUON_MSC -std=c++14 -pthread -o cluon-msc cluon-complete.cpp
 ```
 
-Next, we create the self-contained, C++14-compliant header file from our message specification file `example.odvd`:
+Next, we create the self-contained, C++14-compliant header file from our message specification file `opendlv-standard-message-set-v0.9.7.odvd`:
 
 ```
-./cluon-msc --cpp --out=example.hpp example.odvd
+./cluon-msc --cpp --out=example.hpp opendlv-standard-message-set-v0.9.7.odvd
 ```
 
 Now, we can create a simple C++ program, that is using an `OD4Session` to
@@ -110,7 +110,7 @@ docker run --rm -ti --net=host chrberger/cluon-javascript-cpp-amd64:latest ping-
 
 You can check whether this program works properly by using [`cluon-livefeed`](https://github.com/chrberger/cluon-livefeed):
 ```
-docker run --rm -ti --init --net=host -v $PWD:/opt chrberger/cluon-livefeed-multi:v0.0.89 --cid=111 --odvd=/opt/example.odvd
+docker run --rm -ti --init --net=host -v $PWD:/opt chrberger/cluon-livefeed-multi:v0.0.89 --cid=111 --odvd=/opt/opendlv-standard-message-set-v0.9.7.odvd
 ```
 
 ## Building

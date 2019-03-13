@@ -24,7 +24,7 @@
 #include "cluon-complete.hpp"
 
 // Include the message specification.
-#include "example.hpp"
+#include "opendlv-standard-message-set.hpp"
 
 int32_t main(int32_t argc, char **argv) {
     // Parse the command line parameters to read the CID number that specifies an OD4Session to exchange data.
@@ -38,31 +38,30 @@ int32_t main(int32_t argc, char **argv) {
     else {
         // Interface to a running OpenDaVINCI session 
         cluon::OD4Session od4{static_cast<uint16_t>(std::stoi(commandlineArguments["cid"]))};
-
         // Define a callback lambda...
-        auto pong = [](cluon::data::Envelope &&env){
-            // All data exchanged in an OD4Session is sent using cluon::data::Envelope.
-            // This call is extracting the actual payload from the Envelope - in our
-            // case the example message "example::Pong".
-            example::Pong p = cluon::extractMessage<example::Pong>(std::move(env));
-            std::cout << "Received: '" << p.text() << "', " << p.number() << std::endl;
-        };
-        // ...and registering the callback for message identifier example::Pong::ID().
-        od4.dataTrigger(example::Pong::ID(), pong);
+        auto onPedalPositionReading = [](cluon::data::Envelope &&env){
+            opendlv::proxy::PedalPositionReading p = cluon::extractMessage<opendlv::proxy::PedalPositionReading>(std::move(env));
+            if(env.senderStamp() == 1901){
+                std::cout << "Brake Position: " << p.position()<< std::endl;
+            }else{
+                std::cout <<env.senderStamp()<< "?? Position: " << p.position()<< std::endl;
 
+            }
+        };
+        od4.dataTrigger(opendlv::proxy::PedalPositionReading::ID(), onPedalPositionReading);
+
+        
         // Now, we define a time-triggered sending lambda.
         uint32_t counter{0};
         auto ping = [&od4, &counter](){
             // Define a message...
-            example::Ping p;
-            p.number(counter).text("Hello World: " + std::to_string(counter++));
-            // and send the data.
-            od4.send(p);
+            
             return true;
         };
         // Finally, register the lambda as time-triggered function.
         const float RUN_AT_TWO_HERTZ{2.0f};
         od4.timeTrigger(RUN_AT_TWO_HERTZ, ping); // Won't return until stopped.
-    }
+        }
+
     return 0;
 }

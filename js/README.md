@@ -55,7 +55,7 @@ Next, we load the ODVD message specification file to have information about the
 messages to decode and encode:
 
 ```javascript
-var odvdMessageSpecificationFile = getResourceFrom("example.odvd");
+var odvdMessageSpecificationFile = getResourceFrom("opendlv-standard-message-set-v0.9.7.odvd");
 console.log("Loaded " + __libcluon.setMessageSpecification(odvdMessageSpecificationFile) + " messages from specification.");
 ```
 

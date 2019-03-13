@@ -19,7 +19,7 @@ project(ping-pong)
 
 ################################################################################
 # Defining the relevant version for libcluon and the messages to be used.
-set(MESSAGE_SET example.odvd)
+set(MESSAGE_SET opendlv-standard-message-set-v0.9.7.odvd)
 set(CLUON_COMPLETE cluon-complete-v0.0.104.hpp)
 
 ################################################################################
@@ -62,10 +62,10 @@ add_custom_command(OUTPUT ${CMAKE_BINARY_DIR}/cluon-msc
     DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/${CLUON_COMPLETE})
 
 ################################################################################
-# Generate example.hpp from ${MESSAGE_SET} file.
-add_custom_command(OUTPUT ${CMAKE_BINARY_DIR}/example.hpp
+# Generate opendlv-standard-message-set.hpp from ${MESSAGE_SET} file.
+add_custom_command(OUTPUT ${CMAKE_BINARY_DIR}/opendlv-standard-message-set.hpp
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-    COMMAND ${CMAKE_BINARY_DIR}/cluon-msc --cpp --out=${CMAKE_BINARY_DIR}/example.hpp ${CMAKE_CURRENT_SOURCE_DIR}/${MESSAGE_SET}
+    COMMAND ${CMAKE_BINARY_DIR}/cluon-msc --cpp --out=${CMAKE_BINARY_DIR}/opendlv-standard-message-set.hpp ${CMAKE_CURRENT_SOURCE_DIR}/${MESSAGE_SET}
     DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/${MESSAGE_SET} ${CMAKE_BINARY_DIR}/cluon-msc)
 # Add current build directory as include directory as it contains generated files.
 include_directories(SYSTEM ${CMAKE_BINARY_DIR})
@@ -81,8 +81,8 @@ add_executable(${PROJECT_NAME} ${CMAKE_CURRENT_SOURCE_DIR}/${PROJECT_NAME}.cpp)
 target_link_libraries(${PROJECT_NAME} ${LIBRARIES})
 
 # Add dependency to generate .hpp file.
-add_custom_target(generate_example_hpp DEPENDS ${CMAKE_BINARY_DIR}/example.hpp)
-add_dependencies(${PROJECT_NAME} generate_example_hpp)
+add_custom_target(generate_opendlv-standard-message-set_hpp DEPENDS ${CMAKE_BINARY_DIR}/opendlv-standard-message-set.hpp)
+add_dependencies(${PROJECT_NAME} generate_opendlv-standard-message-set_hpp)
 
 ################################################################################
 # Install executable.
