@@ -28,25 +28,90 @@ DEALINGS IN THE SOFTWARE.
     </head>
     
     <h1>cfsd Message ctrl Panel</h1>
+
     Server Status: <label id="lb-server-status"></label> <br>
-    <input id="checkbox-brake" type="checkbox" name="brake" value="1041-1901" onchange="">Brake:<input id="text-brake" type="text" name="brake" value="0"> <button type="button" id="btn-brake" name="brake" value="1041-1901" onclick="OnBtnSend(this)">send!</button> <label id="lb-brake">0</label> <br>
-    <input id="checkbox-dlStatus" type="checkbox" name="dlStatus" value="1040-1924" onchange="">dlStatus:<input id="text-dlStatus" type="text" name="dlStatus" value="0"> <button type="button" id="btn-dlStatus" name="dlStatus" value="1040-1924" onclick="OnBtnSend(this)">send!</button> <label id="lb-dlStatus">0</label> <br>
-    <input id="checkbox-resStatus" type="checkbox" name="resStatus" value="1040-1407" onchange="">resStatus:<input id="text-resStatus" type="text" name="resStatus" value="0"> <button type="button" id="btn-resStatus" name="resStatus" value="1040-1407" onclick="OnBtnSend(this)">send!</button> <label id="lb-resStatus">0</label> <br>
-<!--
-    <input id="checkbox-iteM" type="checkbox" name="iteM" value="msgid-msgstp" onchange="doalert(this)">iteM:<input id="text-iteM" type="text" name="iteM" value="0"> <button type="button" id="btn-iteM" name="iteM" value="msgid-msgstp" onclick="OnBtnSend(this)">send!</button> <label id="lb-iteM">0</label> <br>
+
+    <div id="div-predefine-msgs">   
+
+    </div>
+<!-- example of a line of inputs
+    <input id="checkbox-brake" type="checkbox" name="brake" value="1041-1901" onchange="">
+    <label>Brake:</label>
+    <input id="text-brake" type="text" name="brake" value="0">
+    <button type="button" id="btn-brake" name="brake" value="1041-1901" onclick="OnBtnSend(this)">send!</button>
+    <label id="lb-brake">0</label> <br>
+
+    <input id="checkbox-iteM" type="checkbox" name="iteM" value="msgid-msgstp" onchange=""> <label>iteM:</label> <input id="text-iteM" type="text" name="iteM" value="0"> <button type="button" id="btn-iteM" name="iteM" value="msgid-msgstp" onclick="OnBtnSend(this)">send!</button> <label id="lb-iteM">0</label> <br>
+
 -->
+<!--setting the time trigger-->
+<div>
     frequency: <input id="text-freq" type="text" name="txt-iteM" value="10"> <br>
     Status:<label id="lb-status">Stopped!</label> <br>
     <button type="button" onclick="OnBtnPlay(this)">play &#9658; </button>
     <button type="button" onclick="OnBtnStop(this)">Stop || </button>
-
+</div>
 
 <body>
 
 <script>
     // "Instantiate" libcluon.
     var __libcluon = libcluon();
+    function createInput(name,msgid,msgstp,defValue){
+        var section = document.createElement("div");
+        //<input id="checkbox-iteM" type="checkbox" name="iteM" value="msgid-msgstp">
+        var ckbox = document.createElement("INPUT");
+        ckbox.setAttribute("type","checkbox");
+        ckbox.setAttribute("id","checkbox-"+name);
+        ckbox.setAttribute("name",name);
+        ckbox.setAttribute("value",""+msgid+"-"+msgstp);
+        ckbox.innerHTML = name;
+        section.appendChild(ckbox);
+
+        var lb = document.createElement("LABEL");
+        lb.innerHTML = name+":";
+        section.appendChild(lb)
+        
+        //<input id="text-brake" type="text" name="brake" value="0">
+        var txt = document.createElement("INPUT");
+        txt.setAttribute("type","text");
+        txt.setAttribute("id","text-"+name);
+        txt.setAttribute("name",name)
+        txt.setAttribute("value",String(defValue));
+        section.appendChild(txt);
+
+        //<button type="button" id="btn-brake" name="brake" value="1041-1901" onclick="OnBtnSend(this)">send!</button>
+        var btn = document.createElement("BUTTON");
+        btn.setAttribute("type","button");
+        btn.setAttribute("id","btn-" + name);
+        btn.setAttribute("name",name);
+        btn.setAttribute("value", "" + msgid + "-" + msgstp);
+        btn.setAttribute("onclick","OnBtnSend(this)");
+        btn.innerHTML = "send!"
+        section.append(btn);
+
+        //<label id="lb-brake">0</label>
+        var lbCount = document.createElement("LABEL");
+        lbCount.setAttribute("id","lb-" + name);
+        lbCount.innerHTML = "" + 0;
+        section.append(lbCount);
+        //br
+        section.append(document.createElement("BR"));
+        return section;
+    }
+
+    
+
+    //load messages
     var MSG_NAMES = ["brake","dlStatus","resStatus"];
+    var MSG_IDS   = ["1041","1040","1040"];
+    var MSG_STMPS = ["1901","1924","1407"];
+    var MSG_DEFVAL= ["0","0","0"];
+    
+    for (idx =0;idx<MSG_NAMES.length;idx++){
+        document.getElementById("div-predefine-msgs").appendChild(createInput(MSG_NAMES[idx],MSG_IDS[idx],MSG_STMPS[idx],MSG_DEFVAL[idx]));
+    }
+
     // Function to load data from a remote destination.
     function getResourceFrom(url) {
         var xmlHttp = new XMLHttpRequest();
@@ -122,7 +187,6 @@ DEALINGS IN THE SOFTWARE.
     function SendByElem(elem){
         var msg_name = elem.name;
         var msg_id_stmp = elem.value.split("-");
-
         SendMessage(elem.name,parseInt(msg_id_stmp[0]),
                         parseInt(msg_id_stmp[1]),
                         document.getElementById("text-"+msg_name).value)
