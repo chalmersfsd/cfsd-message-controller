@@ -31,7 +31,6 @@ DEALINGS IN THE SOFTWARE.
     <label>load message setting file:
         <input id="file-msgset" type='file' />
     </label> <br>
-    <button onclick="loadSettingsFiles()">Load Setting File</button><br>
 
     Server Status: <label id="lb-server-status"></label> <br>
 
@@ -44,18 +43,19 @@ DEALINGS IN THE SOFTWARE.
     <input id="checkbox-brake" type="checkbox" name="brake" value="1041-1901" onchange="">
     <label>Brake:</label>
     <input id="text-brake" type="text" name="brake" value="0">
-    <button type="button" id="btn-brake" name="brake" value="1041-1901" onclick="OnBtnSend(this)">send!</button>
+    <button type="button" id="btn-brake" name="brake" value="1041-1901" onclick="onBtnSend(this)">send!</button>
     <label id="lb-brake">0</label> <br>
 
-    <input id="checkbox-iteM" type="checkbox" name="iteM" value="msgid-msgstp" onchange=""> <label>iteM:</label> <input id="text-iteM" type="text" name="iteM" value="0"> <button type="button" id="btn-iteM" name="iteM" value="msgid-msgstp" onclick="OnBtnSend(this)">send!</button> <label id="lb-iteM">0</label> <br>
+    <input id="checkbox-iteM" type="checkbox" name="iteM" value="msgid-msgstp" onchange=""> <label>iteM:</label> <input id="text-iteM" type="text" name="iteM" value="0"> <button type="button" id="btn-iteM" name="iteM" value="msgid-msgstp" onclick="onBtnSend(this)">send!</button> <label id="lb-iteM">0</label> <br>
 
 -->
 <!--setting the time trigger-->
 <div>
     frequency: <input id="text-freq" type="text" name="txt-iteM" value="10"> <br>
     Status:<label id="lb-status">Stopped!</label> <br>
-    <button type="button" onclick="OnBtnPlay(this)">play &#9658; </button>
-    <button type="button" onclick="OnBtnStop(this)">Stop || </button>
+    <button type="button" onclick="onBtnPlay(this)">play &#9658; </button>
+    <button type="button" onclick="onBtnStop(this)">Stop || </button>
+    <button onclick="onBtnClear(this)">Clear Counts</button><br>
 </div>
 
 <body>
@@ -66,9 +66,14 @@ DEALINGS IN THE SOFTWARE.
 
     document.getElementById('file-msgset').addEventListener('change', loadSettingsFiles, false);
     
+    //global var for the loaded messages
     var MSG_SETS;
     var MSG_NAMES = [];
 
+    //load messages 
+    loadInputDiv("./msgSets.json");
+    
+    //clear the input div for the new settings
     function clearEnv(){
         var elem = document.getElementById("div-inputs");
         elem.parentNode.removeChild(elem);
@@ -79,7 +84,7 @@ DEALINGS IN THE SOFTWARE.
         msgDiv.appendChild(emptyDiv);
 
     }
-
+    // load setting files and then add in to the input div
     function loadSettingsFiles(elem){
         var file = elem.target.files[0];
         if (!file) {
@@ -121,13 +126,13 @@ DEALINGS IN THE SOFTWARE.
         txt.setAttribute("value",String(defValue));
         section.appendChild(txt);
 
-        //<button type="button" id="btn-brake" name="brake" value="1041-1901" onclick="OnBtnSend(this)">send!</button>
+        //<button type="button" id="btn-brake" name="brake" value="1041-1901" onclick="onBtnSend(this)">send!</button>
         var btn = document.createElement("BUTTON");
         btn.setAttribute("type","button");
         btn.setAttribute("id","btn-" + name);
         btn.setAttribute("name",name);
         btn.setAttribute("value", "" + msgid + "-" + msgstp);
-        btn.setAttribute("onclick","OnBtnSend(this)");
+        btn.setAttribute("onclick","onBtnSend(this)");
         btn.innerHTML = "send!"
         section.append(btn);
 
@@ -140,7 +145,7 @@ DEALINGS IN THE SOFTWARE.
         section.append(document.createElement("BR"));
         return section;
     }
-
+    // read from text
     function readTextFile(file, callback){
         var rawFile = new XMLHttpRequest();
         rawFile.overrideMimeType("application/json");
@@ -154,7 +159,7 @@ DEALINGS IN THE SOFTWARE.
     }
     
 
-
+    // add input elements to input div from json setting string
     function loadInputDivFromJson(text){
         MSG_SETS = JSON.parse(text).msgSets;
         for (idx =0;idx<MSG_SETS.length;idx++){
@@ -167,7 +172,7 @@ DEALINGS IN THE SOFTWARE.
         }
         return MSG_SETS.length
     }
-
+    // load input elements from JSON files
     function loadInputDiv(filepath){
         MSG_NAMES = [];
         readTextFile(filepath, function(text){
@@ -177,8 +182,7 @@ DEALINGS IN THE SOFTWARE.
     }
     
 
-    //load messages 
-    loadInputDiv("./msgSets.json");
+    
     
 
     // Function to load data from a remote destination.
@@ -249,22 +253,22 @@ DEALINGS IN THE SOFTWARE.
         document.getElementById("lb-server-status").innerHTML="ERROR!:WebSocket is not supported by your Browserb!";
     }
 
-    function OnBtnSend(elem) {
-        SendByElem(elem);
+    function onBtnSend(elem) {
+        sendByElem(elem);
     }
     // read the attribute of element then call the send message method
-    function SendByElem(elem){
+    function sendByElem(elem){
         var msg_name = elem.name;
         var msg_id_stmp = elem.value.split("-");
-        SendMessage(elem.name,parseInt(msg_id_stmp[0]),
+        sendMessage(elem.name,parseInt(msg_id_stmp[0]),
                         parseInt(msg_id_stmp[1]),
                         document.getElementById("text-"+msg_name).value)
         
         // show send count!
         document.getElementById("lb-"+msg_name).innerHTML = parseInt(document.getElementById("lb-"+msg_name).innerHTML) + 1;
     }
-
-    function SendMessage(msg_name,msg_id,msg_stmp,msg_content){
+    // convert the message content and send opendlv messages. If the message type is not here it will alert. 
+    function sendMessage(msg_name,msg_id,msg_stmp,msg_content){
         // Transform JSON response into binary Protobuf-encoded data...
         const MESSAGE_ID = msg_id;
         const SENDER_STAMP = msg_stmp; 
@@ -298,30 +302,41 @@ DEALINGS IN THE SOFTWARE.
         // and send via the websocket.
         ws.send(strToAB(replyInProtobuf), { binary: true });
     }
-    // Global time trigger element. OnBtnPlay start, OnBtnStop stop
+    // Global time trigger element. onBtnPlay start, onBtnStop stop
     var msgTimetrigger;
-
-    function OnBtnPlay(elm){
+    var msgSending = false;
+    // start playing it is not playing
+    function onBtnPlay(elem){
         var msec = (1000/parseInt(document.getElementById("text-freq").value)).toFixed()
         document.getElementById("lb-status").innerHTML = "Sending At every" + msec + "ms";
-        msgTimetrigger = setInterval(SendMsgAtFrequency, msec);
+        if (! msgSending){
+            msgTimetrigger = setInterval(sendMsgAtFrequency, msec);
+            msgSending=true;
+        }
     }
-    
-    function OnBtnStop(elm){
+    // stop playing
+    function onBtnStop(elem){
         clearInterval(msgTimetrigger);
+        msgSending=false
         document.getElementById("lb-status").innerHTML = "Stopped";
     }
-
-    function SendMsgAtFrequency(){
+    // the fuction for sending message at setInterval
+    function sendMsgAtFrequency(){
         for (i=0; i < MSG_NAMES.length; i++){
             var msg_name = MSG_NAMES[i];
             var elem = document.getElementById("checkbox-"+msg_name);
             if (elem.checked){
-                SendByElem(elem);
+                sendByElem(elem);
             }
         }
     }
-
+    // set the counts back to zero
+    function onBtnClear(elem){
+        for (i=0; i < MSG_NAMES.length; i++){
+            var msg_name = MSG_NAMES[i];
+            document.getElementById("lb-"+msg_name).innerHTML=0;
+        }
+    }
 
 </script>
 
