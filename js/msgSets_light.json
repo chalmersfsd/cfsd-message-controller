@@ -1,0 +1,89 @@
+{
+    "msgSets":[
+    {
+      "name":"brake",
+      "id": "1041",
+      "senderStamp": "1901",
+      "defVal": "0"
+    },
+    {
+      "name":"throttle",
+      "id": "1041",
+      "senderStamp": "1902",
+      "defVal": "0"
+    },
+    {
+      "name":"brakeFront",
+      "id": "1041",
+      "senderStamp": "1922",
+      "defVal": "0"
+    },
+    {
+      "name":"brakeRear",
+      "id": "1041",
+      "senderStamp": "1923",
+      "defVal": "0"
+    },
+    {
+      "name":"accSoC",
+      "id": "1037",
+      "senderStamp": "1921",
+      "defVal": "0"
+    },
+    {
+      "name":"dlStatus",
+      "id": "1040",
+      "senderStamp": "1924",
+      "defVal": "0"
+    },
+    {
+      "name":"asMission",
+      "id": "1040",
+      "senderStamp": "1406",
+      "defVal": "0"
+    },
+    {
+      "name":"asRedyToDrive",
+      "id": "1040",
+      "senderStamp": "1404",
+      "defVal": "0"
+    },
+    {
+      "name":"asState",
+      "id": "1040",
+      "senderStamp": "1401",
+      "defVal": "0"
+    },
+    {
+      "name":"resStatus",
+      "id": "1040",
+      "senderStamp": "1407",
+      "defVal": "0"
+    },
+    {
+      "name":"resEStop",
+      "id": "1040",
+      "senderStamp": "1408",
+      "defVal": "0"
+    },
+    {
+      "name":"resQuality",
+      "id": "1040",
+      "senderStamp": "1409",
+      "defVal": "0"
+    },
+    {
+      "name":"resButtons",
+      "id": "1040",
+      "senderStamp": "1410",
+      "defVal": "0"
+    },
+    {
+      "name":"resInitialize",
+      "id": "1040",
+      "senderStamp": "1499",
+      "defVal": "0"
+    }
+    ]
+  }
+  

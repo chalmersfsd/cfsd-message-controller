@@ -28,11 +28,17 @@ DEALINGS IN THE SOFTWARE.
     </head>
     
     <h1>cfsd Message ctrl Panel</h1>
+    <label>load message setting file:
+        <input id="file-msgset" type='file' />
+    </label> <br>
+    <button onclick="loadSettingsFiles()">Load Setting File</button><br>
 
     Server Status: <label id="lb-server-status"></label> <br>
 
-    <div id="div-predefine-msgs">   
-
+    <div id="div-msgs">   
+        <div id="div-inputs">
+            
+        </div>
     </div>
 <!-- example of a line of inputs
     <input id="checkbox-brake" type="checkbox" name="brake" value="1041-1901" onchange="">
@@ -57,6 +63,41 @@ DEALINGS IN THE SOFTWARE.
 <script>
     // "Instantiate" libcluon.
     var __libcluon = libcluon();
+
+    document.getElementById('file-msgset').addEventListener('change', loadSettingsFiles, false);
+    
+    var MSG_SETS;
+    var MSG_NAMES = [];
+
+    function clearEnv(){
+        var elem = document.getElementById("div-inputs");
+        elem.parentNode.removeChild(elem);
+        MSG_NAMES = [];
+        var emptyDiv = document.createElement("DIV");
+        emptyDiv.setAttribute("id","div-inputs");
+        var msgDiv = document.getElementById("div-msgs");
+        msgDiv.appendChild(emptyDiv);
+
+    }
+
+    function loadSettingsFiles(elem){
+        var file = elem.target.files[0];
+        if (!file) {
+            return;
+        }
+        clearEnv();
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            var contents = e.target.result;
+            var counts = loadInputDivFromJson(contents);
+            alert("Loaded: " + counts + " types of messages");
+        };
+        reader.readAsText(file);
+    }
+
+
+
+    // create messages function 
     function createInput(name,msgid,msgstp,defValue){
         var section = document.createElement("div");
         //<input id="checkbox-iteM" type="checkbox" name="iteM" value="msgid-msgstp">
@@ -100,17 +141,45 @@ DEALINGS IN THE SOFTWARE.
         return section;
     }
 
+    function readTextFile(file, callback){
+        var rawFile = new XMLHttpRequest();
+        rawFile.overrideMimeType("application/json");
+        rawFile.open("GET", file, true);
+        rawFile.onreadystatechange = function() {
+            if (rawFile.readyState === 4 && rawFile.status == "200") {
+                callback(rawFile.responseText);
+            }
+        }
+        rawFile.send(null);
+    }
     
 
-    //load messages
-    var MSG_NAMES = ["brake","dlStatus","resStatus"];
-    var MSG_IDS   = ["1041","1040","1040"];
-    var MSG_STMPS = ["1901","1924","1407"];
-    var MSG_DEFVAL= ["0","0","0"];
-    
-    for (idx =0;idx<MSG_NAMES.length;idx++){
-        document.getElementById("div-predefine-msgs").appendChild(createInput(MSG_NAMES[idx],MSG_IDS[idx],MSG_STMPS[idx],MSG_DEFVAL[idx]));
+
+    function loadInputDivFromJson(text){
+        MSG_SETS = JSON.parse(text).msgSets;
+        for (idx =0;idx<MSG_SETS.length;idx++){
+            document.getElementById("div-inputs").appendChild(
+                createInput(MSG_SETS[idx].name,
+                            MSG_SETS[idx].id,
+                            MSG_SETS[idx].senderStamp,
+                            MSG_SETS[idx].defVal));
+            MSG_NAMES.push(MSG_SETS[idx].name)
+        }
+        return MSG_SETS.length
     }
+
+    function loadInputDiv(filepath){
+        MSG_NAMES = [];
+        readTextFile(filepath, function(text){
+            counts = loadInputDivFromJson(text);
+            console.log("Loaded: " + counts + " types of messages");
+        });
+    }
+    
+
+    //load messages 
+    loadInputDiv("./msgSets.json");
+    
 
     // Function to load data from a remote destination.
     function getResourceFrom(url) {
@@ -213,8 +282,11 @@ DEALINGS IN THE SOFTWARE.
             var replyInJSON = "{\"groundSteering\":" + parseFloat(msg_content) + "}";
         }else if(MESSAGE_ID == 1034){//PressureReading
             var replyInJSON = "{\"pressure\":" + parseFloat(msg_content) + "}";
-        }else{
-            alert("wrong setting!")
+        }else if (MESSAGE_ID == 1037){//VoltageReading
+            var replyInJSON = "{\"voltage\":" + parseFloat(msg_content) + "}";
+        }
+        else{
+            alert("Message Type does not support!")
         }
         var replyInProtobuf = __libcluon.encodeEnvelopeFromJSONWithoutTimeStamps(replyInJSON, MESSAGE_ID, SENDER_STAMP);
 

@@ -1,0 +1,160 @@
+{
+    "msgSets":[{
+      "name":"torqueRight",
+      "id": "1082",
+      "senderStamp": "1501",
+      "defVal": "0"
+    },
+    {
+      "name":"torqueLeft",
+      "id": "1082",
+      "senderStamp": "1500",
+      "defVal": "0"
+    },
+    {
+      "name":"wheelRareRight",
+      "id": "1047",
+      "senderStamp": "1901",
+      "defVal": "0"
+    },
+    {
+      "name":"wheelRareLeft",
+      "id": "1047",
+      "senderStamp": "1902",
+      "defVal": "0"
+    },
+    {
+      "name":"wheelFrontRight",
+      "id": "1047",
+      "senderStamp": "1903",
+      "defVal": "0"
+    },
+    {
+      "name":"wheelFrontLeft",
+      "id": "1047",
+      "senderStamp": "1904",
+      "defVal": "0"
+    },
+    {
+      "name":"brake",
+      "id": "1041",
+      "senderStamp": "1901",
+      "defVal": "0"
+    },
+    {
+      "name":"throttle",
+      "id": "1041",
+      "senderStamp": "1902",
+      "defVal": "0"
+    },
+    {
+      "name":"brakeFront",
+      "id": "1041",
+      "senderStamp": "1922",
+      "defVal": "0"
+    },
+    {
+      "name":"brakeRear",
+      "id": "1041",
+      "senderStamp": "1923",
+      "defVal": "0"
+    },
+    {
+      "name":"accSoC",
+      "id": "1037",
+      "senderStamp": "1921",
+      "defVal": "0"
+    },
+    {
+      "name":"dlStatus",
+      "id": "1040",
+      "senderStamp": "1924",
+      "defVal": "0"
+    },
+    {
+      "name":"asMission",
+      "id": "1040",
+      "senderStamp": "1406",
+      "defVal": "0"
+    },
+    {
+      "name":"asRedyToDrive",
+      "id": "1040",
+      "senderStamp": "1404",
+      "defVal": "0"
+    },
+    {
+      "name":"asState",
+      "id": "1040",
+      "senderStamp": "1401",
+      "defVal": "0"
+    },
+    {
+      "name":"resStatus",
+      "id": "1040",
+      "senderStamp": "1407",
+      "defVal": "0"
+    },
+    {
+      "name":"resEStop",
+      "id": "1040",
+      "senderStamp": "1408",
+      "defVal": "0"
+    },
+    {
+      "name":"resQuality",
+      "id": "1040",
+      "senderStamp": "1409",
+      "defVal": "0"
+    },
+    {
+      "name":"resButtons",
+      "id": "1040",
+      "senderStamp": "1410",
+      "defVal": "0"
+    },
+    {
+      "name":"resInitialize",
+      "id": "1040",
+      "senderStamp": "1499",
+      "defVal": "0"
+    },
+    {
+      "name":"steeringPosition",
+      "id": "1045",
+      "senderStamp": "1200",
+      "defVal": "0"
+    },
+    {
+      "name":"rackPosition",
+      "id": "1045",
+      "senderStamp": "1206",
+      "defVal": "0"
+    },
+    {
+      "name":"pressureService",
+      "id": "1034",
+      "senderStamp": "1202",
+      "defVal": "0"
+    },
+    {
+      "name":"pressureRegulator",
+      "id": "1034",
+      "senderStamp": "1205",
+      "defVal": "0"
+    },
+    {
+      "name":"pressureEBSLine",
+      "id": "1034",
+      "senderStamp": "1201",
+      "defVal": "0"
+    },
+    {
+      "name":"pressureEBSAct",
+      "id": "1034",
+      "senderStamp": "1203",
+      "defVal": "0"
+    }
+    ]
+  }
+  
