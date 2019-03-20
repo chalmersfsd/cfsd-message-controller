@@ -288,6 +288,8 @@ DEALINGS IN THE SOFTWARE.
             var replyInJSON = "{\"pressure\":" + parseFloat(msg_content) + "}";
         }else if (MESSAGE_ID == 1037){//VoltageReading
             var replyInJSON = "{\"voltage\":" + parseFloat(msg_content) + "}";
+        }else if (MESSAGE_ID == 1090){//GroundSteeringRequest 
+            var replyInJSON = "{\"groundSteering\":" + parseFloat(msg_content) + "}";
         }
         else{
             alert("Message Type does not support!")
