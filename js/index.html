@@ -290,6 +290,8 @@ DEALINGS IN THE SOFTWARE.
             var replyInJSON = "{\"voltage\":" + parseFloat(msg_content) + "}";
         }else if (Message_ID == 1085){//SwitchStateRequest
             var replyInJSON = "{\"state\":" + parseInt(msg_content) + "}";
+        }else if (MESSAGE_ID == 1090){//GroundSteeringRequest 
+            var replyInJSON = "{\"groundSteering\":" + parseFloat(msg_content) + "}";
         }else{
             alert("Message Type does not support!")
         }
