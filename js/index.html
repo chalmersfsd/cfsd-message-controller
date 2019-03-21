@@ -288,8 +288,9 @@ DEALINGS IN THE SOFTWARE.
             var replyInJSON = "{\"pressure\":" + parseFloat(msg_content) + "}";
         }else if (MESSAGE_ID == 1037){//VoltageReading
             var replyInJSON = "{\"voltage\":" + parseFloat(msg_content) + "}";
-        }
-        else{
+        }else if (Message_ID == 1085){//SwitchStateRequest
+            var replyInJSON = "{\"state\":" + parseInt(msg_content) + "}";
+        }else{
             alert("Message Type does not support!")
         }
         var replyInProtobuf = __libcluon.encodeEnvelopeFromJSONWithoutTimeStamps(replyInJSON, MESSAGE_ID, SENDER_STAMP);
