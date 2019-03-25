@@ -136,11 +136,24 @@ DEALINGS IN THE SOFTWARE.
         btn.innerHTML = "send!"
         section.append(btn);
 
+
+        if (msgid == 1085){ // slider for steering request
+            var slider = document.createElement("input");
+            slider.setAttribute("type", "range");
+            slider.setAttribute("id","slider-" + name);
+            slider.setAttribute("name",name);
+            slider.setAttribute("min","-200");
+            slider.setAttribute("max","200");
+            slider.setAttribute("oninput","onSliderChange(this)");
+            section.append(slider);
+        }
+        
         //<label id="lb-brake">0</label>
         var lbCount = document.createElement("LABEL");
         lbCount.setAttribute("id","lb-" + name);
         lbCount.innerHTML = "" + 0;
         section.append(lbCount);
+        
         //br
         section.append(document.createElement("BR"));
         return section;
@@ -253,10 +266,11 @@ DEALINGS IN THE SOFTWARE.
         document.getElementById("lb-server-status").innerHTML="ERROR!:WebSocket is not supported by your Browserb!";
     }
 
+    
     function onBtnSend(elem) {
         sendByElem(elem);
     }
-    // read the attribute of element then call the send message method
+    // read the button attribute of element then call the send message method
     function sendByElem(elem){
         var msg_name = elem.name;
         var msg_id_stmp = elem.value.split("-");
@@ -323,6 +337,13 @@ DEALINGS IN THE SOFTWARE.
         msgSending=false
         document.getElementById("lb-status").innerHTML = "Stopped";
     }
+
+    function onSliderChange(elem){
+        txtbox = document.getElementById("text-"+elem.name);
+        txtbox.setAttribute("value",String(-elem.value/10));
+    }
+
+
     // the fuction for sending message at setInterval
     function sendMsgAtFrequency(){
         for (i=0; i < MSG_NAMES.length; i++){
@@ -331,7 +352,7 @@ DEALINGS IN THE SOFTWARE.
             if (elem.checked){
                 sendByElem(elem);
             }
-        }
+        }       
     }
     // set the counts back to zero
     function onBtnClear(elem){
