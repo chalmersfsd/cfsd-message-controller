@@ -18,7 +18,7 @@ docker build -t cfsd-message-controller:v0.0.0 -f Dockerfile.amd64 .
 Run:
 
 ```
-docker run --rm -ti --net=host cfsd-message-controller:v0.0.0 -cid=130
+docker run --rm -ti --net=host cfsd-message-controller:v0.0.0 --cid=130
 ```
 
 open in web browser: localhost:8082
