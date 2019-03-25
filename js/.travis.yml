@@ -1,0 +1,36 @@
+os: linux
+language: cpp
+sudo: required
+branches:
+  only:
+  - "/^master$/"
+  - "/^pre-release$/"
+  - "/^v.*$/"
+services:
+- docker
+addons:
+  apt:
+    update: true
+env:
+  global:
+  - BRANCH=${TRAVIS_BRANCH}
+  - TAG=${TRAVIS_TAG}
+  - DOCKERHUB='chalmersfsd'
+  - IMAGE=`echo ${TRAVIS_REPO_SLUG#*/}`
+  - secure: bcAYyS0+GnGCKZu1qTrJ75akECQJMmBI6+yPxqxN5h7zgMazHr5vEC+1eBXIT88hLl3Mvn+fa8MDaAqsfbS6OcoZuZk53grHJKu5EDsGsqj0SjTbcyMm4NZnKs024B0xLT647uuf6oRkDza8GHLtPUrRQyT80rh6ZbLggjVzptFLjEq0FAMaEd5ppfZeyaj67uVpt+9rOmOjkXTMt9mGxYDvp6saJeUaybI9WIjrHi/eCF7FveACVRCEeHKwd89CgT/x1PKFvtJqvb55N6R3OONaDGEABQgiTeo46unO3Qt1MWnuOdtk6YEFD9C16Smcor/8thF3Jt4eseMppm2EjBjb+saXtmieVYX8c6anrjNTUzL2ZgsEshz7cmBA+F7fJXVINjEL5Ri05hL43cfh+lvoRzGcsgPZsSoWxTA3xTkMPmLX0WCHyFE60lvKN0hWRvevfl9UZAv/a98RWwFQTBXh1UK6PV/gIJqxr689hDXs0YNK+mcRPTlMT+fPt8fkGzGfVBjyFPdClbGYFUTrvBLpCEUreCAcsUlDtYO9BcL4+4sdRI+vLXBWdJnvBWKAidGDAaEhHdPOLPKEp6NYA8gr7lJCHT8Brn7fsSnAbHRaV66FdTJ/7glm2HEuXCFSkazICQohebKT/oa1aDX07jj5UFT5Brz7jPRbLcTns4w=
+  - secure: a4Obm5kSMq2IenxK6YL+6OuBtLNXq3gdB+m3B5WEdKL11q0Xq4mv1vLLC+NSrQYo2Q7ufZ2EyxN2JAiBs+kIuqkhHeIrpbQYSpMz/iUAt45P6tccv2VqEvcBlRSENscoPapQkhvLQgbnDAxOxcDijm0npiV5dzKm4KDWdFM5eXPP4luv8J3A5hZZwfVN4CJijKq8mG4Q1q/TPVZoCf7CMmVgw/V+NLzT2qyWe3c/VH7hGMCEnpOuiyIlqrczyhKCaUuClPaTbbjN2xuAOAvV7yEVTqr082bGLeZOj4Vhshrhg96OnrPLslarTGR7QebpU5bUhM+jVAJwPxNej9eeEtsuygQ/7pC3TZu08/Qfosrt7N7B1/TCPdfHpv8ej/5qQwwNdpLQTVP5A3+GgLWo74gZlooIRf0J+nZ1twZuzfxBCahQkMRNKshxRY7OvioaShnjY+9BExFYGKmgFGslLGmznaubEGMe0yTrADNVZMnXMyTAvgNmHlPtpugK99CjlsaFBCKCcX4aa/EMv9rthmbguuuIOgnoME3wbnpwkDYsSGTTGh5YZpWEAv7Jh+A1ThpdcIvDaMeg0vm2KVBFCKJyb3syVC9ps6oM8F5UW10ifRWpIjlkpldHt2m7AWoeJGJTfQvb8p0oq1vYf389yqRZRCsnvd5Y4BzLFFDN+XE=
+install:
+- docker build -f Dockerfile.amd64 -t ${IMAGE}:${BRANCH} .
+script: skip
+after_success:
+- if [[ -z "${TAG}" ]]; then echo "This commit hasn't been tagged, will not be pushed
+  to dockerhub"; exit 0; fi
+- docker --version
+- echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
+- docker tag ${IMAGE}:${BRANCH} ${DOCKERHUB}/${IMAGE}:${TAG}
+- docker push ${DOCKERHUB}/${IMAGE}:${TAG}
+- echo "${DOCKERHUB}/${IMAGE}:${TAG}"
+notifications:
+  email:
+    on_success: never
+    on_failure: never

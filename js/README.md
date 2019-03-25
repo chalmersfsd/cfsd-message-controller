@@ -7,18 +7,20 @@ There are two ways of sending messages:
 1. send once
 2. send under a certain frequency
 
+ADD a feature: a slider bar for the Ground Steering Request(1085) 20~-20 step 0.1
+
 msgSets.json saves the settings of the messages types (can be reload).
 ![screenshot from message controller](https://raw.githubusercontent.com/chalmersfsd/cfsd-message-controller/master/msg.png)
 Build:
 
 ```
-docker build -t cfsd-message-controller:v0.0.0 -f Dockerfile.amd64 .
+docker build -t chalmersfsd/cfsd-message-controller:v0.0.3 -f Dockerfile.amd64 .
 ```
 
 Run:
 
 ```
-docker run --rm -ti --net=host cfsd-message-controller:v0.0.0 --cid=130
+docker run --rm -ti --net=host chalmersfsd/cfsd-message-controller:v0.0.3 --cid=130
 ```
 
 open in web browser: localhost:8082
