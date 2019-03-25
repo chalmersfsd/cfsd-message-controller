@@ -154,6 +154,11 @@
       "id": "1034",
       "senderStamp": "1203",
       "defVal": "0"
+    },{
+      "name":"SteeringRequest",
+      "id": "1085",
+      "senderStamp": "1203",
+      "defVal": "0"
     }
     ]
   }

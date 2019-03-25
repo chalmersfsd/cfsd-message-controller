@@ -142,8 +142,10 @@ DEALINGS IN THE SOFTWARE.
             slider.setAttribute("type", "range");
             slider.setAttribute("id","slider-" + name);
             slider.setAttribute("name",name);
-            slider.setAttribute("min","-200");
-            slider.setAttribute("max","200");
+            slider.setAttribute("min","-20");
+            slider.setAttribute("max","20");
+            slider.setAttribute("step","0.1");
+            slider.setAttribute("value","0");
             slider.setAttribute("oninput","onSliderChange(this)");
             section.append(slider);
         }
@@ -340,7 +342,7 @@ DEALINGS IN THE SOFTWARE.
 
     function onSliderChange(elem){
         txtbox = document.getElementById("text-"+elem.name);
-        txtbox.setAttribute("value",String(-elem.value/10));
+        txtbox.setAttribute("value",String(-elem.value));
     }
 
 
