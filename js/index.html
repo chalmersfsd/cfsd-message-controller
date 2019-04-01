@@ -308,6 +308,8 @@ DEALINGS IN THE SOFTWARE.
             var replyInJSON = "{\"state\":" + parseInt(msg_content) + "}";
         }else if (MESSAGE_ID == 1090){//GroundSteeringRequest 
             var replyInJSON = "{\"groundSteering\":" + parseFloat(msg_content) + "}";
+        }else if (MESSAGE_ID == 1087){//PulseWidthModulationRequest 
+            var replyInJSON = "{\"dutyCycleNs\":" + parseInt(msg_content) + "}";
         }else{
             alert("Message Type does not support!")
         }
