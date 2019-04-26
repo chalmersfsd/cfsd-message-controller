@@ -154,10 +154,77 @@
       "id": "1034",
       "senderStamp": "1203",
       "defVal": "0"
-    },{
+    },
+    {
       "name":"SteeringRequest",
       "id": "1090",
-      "senderStamp": "1203",
+      "senderStamp": "314",
+      "defVal": "0"
+    },
+    {
+      "name":"asms",
+      "id": "1040",
+      "senderStamp": "1115",
+      "defVal": "0"
+    },
+    {
+      "name":"ebsOk",
+      "id": "1040",
+      "senderStamp": "1099",
+      "defVal": "0"
+    },
+    {
+      "name":"ebsSound",
+      "id": "1085",
+      "senderStamp": "1044",
+      "defVal": "0"
+    },
+    {
+      "name":"clampExtended",
+      "id": "1040",
+      "senderStamp": "1112",
+      "defVal": "0"
+    },
+    {
+      "name":"serviceBrakeDuty",
+      "id": "1087",
+      "senderStamp": "1341",
+      "defVal": "0"
+    },
+    {
+      "name":"clampSet",
+      "id": "1085",
+      "senderStamp": "1065",
+      "defVal": "0"
+    },
+    {
+      "name":"rackRight",
+      "id": "1085",
+      "senderStamp": "1046",
+      "defVal": "0"
+    },
+    {
+      "name":"steerSpeed",
+      "id": "1087",
+      "senderStamp": "1340",
+      "defVal": "0"
+    },
+    {
+      "name":"finishSignal",
+      "id": "1040",
+      "senderStamp": "1403",
+      "defVal": "0"
+    },
+    {
+      "name":"serviceBrakeValve",
+      "id": "1085",
+      "senderStamp": "1069",
+      "defVal": "0"
+    },
+    {
+      "name":"serviceBrake",
+      "id": "1087",
+      "senderStamp": "1341",
       "defVal": "0"
     }
     ]
