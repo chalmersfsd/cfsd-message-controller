@@ -74,7 +74,7 @@
     {
       "name":"asMission",
       "id": "1040",
-      "senderStamp": "1406",
+      "senderStamp": "1906",
       "defVal": "0"
     },
     {
@@ -86,37 +86,37 @@
     {
       "name":"asState",
       "id": "1040",
-      "senderStamp": "1401",
+      "senderStamp": "2101",
       "defVal": "0"
     },
     {
       "name":"resStatus",
       "id": "1040",
-      "senderStamp": "1407",
+      "senderStamp": "1801",
       "defVal": "0"
     },
     {
       "name":"resEStop",
       "id": "1040",
-      "senderStamp": "1408",
+      "senderStamp": "1802",
       "defVal": "0"
     },
     {
       "name":"resQuality",
       "id": "1040",
-      "senderStamp": "1409",
+      "senderStamp": "1803",
       "defVal": "0"
     },
     {
       "name":"resButtons",
       "id": "1040",
-      "senderStamp": "1410",
+      "senderStamp": "1804",
       "defVal": "0"
     },
     {
       "name":"resInitialize",
-      "id": "1040",
-      "senderStamp": "1499",
+      "id": "1085",
+      "senderStamp": "1899",
       "defVal": "0"
     },
     {
