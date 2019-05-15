@@ -150,6 +150,9 @@ DEALINGS IN THE SOFTWARE.
             section.append(slider);
         }
         
+
+
+
         //<label id="lb-brake">0</label>
         var lbCount = document.createElement("LABEL");
         lbCount.setAttribute("id","lb-" + name);
@@ -310,6 +313,11 @@ DEALINGS IN THE SOFTWARE.
             var replyInJSON = "{\"groundSteering\":" + parseFloat(msg_content) + "}";
         }else if (MESSAGE_ID == 1087){//PulseWidthModulationRequest 
             var replyInJSON = "{\"dutyCycleNs\":" + parseInt(msg_content) + "}";
+        }else if (MESSAGE_ID == 1172){//opendlv.logic.action.AimPoint
+            var contents = msg_content.split("|");
+            var replyInJSON = "{\"azimuthAngle\":"+parseFloat(contents[0]) + 
+                                ",\"zenithAngle\":"+parseFloat(contents[1]) +
+                                ",\"distance\":"+parseFloat(contents[2]) +"}";
         }else{
             alert("Message Type does not support!")
         }

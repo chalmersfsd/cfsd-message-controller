@@ -159,6 +159,11 @@
       "id": "1090",
       "senderStamp": "1203",
       "defVal": "0"
+    },{
+      "name":"AimPoint",
+      "id": "1172",
+      "senderStamp": "2222",
+      "defVal": "0.0|0.0|0.0"
     }
     ]
   }
