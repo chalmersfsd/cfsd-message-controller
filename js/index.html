@@ -313,11 +313,19 @@ DEALINGS IN THE SOFTWARE.
             var replyInJSON = "{\"groundSteering\":" + parseFloat(msg_content) + "}";
         }else if (MESSAGE_ID == 1087){//PulseWidthModulationRequest 
             var replyInJSON = "{\"dutyCycleNs\":" + parseInt(msg_content) + "}";
+        }else if (MESSAGE_ID == 1046){//GroundSpeedReading 
+            var replyInJSON = "{\"groundSpeed\":" + parseFloat(msg_content) + "}";
+        }else if (MESSAGE_ID == 1091){//GroundSpeedReading 
+            var replyInJSON = "{\"groundSpeed\":" + parseFloat(msg_content) + "}";
         }else if (MESSAGE_ID == 1172){//opendlv.logic.action.AimPoint
             var contents = msg_content.split("|");
             var replyInJSON = "{\"azimuthAngle\":"+parseFloat(contents[0]) + 
                                 ",\"zenithAngle\":"+parseFloat(contents[1]) +
                                 ",\"distance\":"+parseFloat(contents[2]) +"}";
+        }else if (MESSAGE_ID == 2010){//opendlv.cfsdProxy.TorqueRequestDual
+            var contents = msg_content.split("|");
+            var replyInJSON = "{\"torqueLeft\":"+parseInt(contents[0]) + 
+                                ",\"torqueRight\":"+parseInt(contents[1]) +"}";
         }else{
             alert("Message Type does not support!")
         }
