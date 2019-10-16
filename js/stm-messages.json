@@ -1,0 +1,89 @@
+{
+    "msgSets":[
+    {
+      "name":"heartbeat",
+      "id": "1085",
+      "senderStamp": "1027",
+      "defVal": "0"
+    },
+    {
+      "name":"ebsSpeaker",
+      "id": "1085",
+      "senderStamp": "1044",
+      "defVal": "0"
+    },
+    {
+      "name":"compressor",
+      "id": "1085",
+      "senderStamp": "1045",
+      "defVal": "0"
+    },
+    {
+      "name":"finishedSignal",
+      "id": "1085",
+      "senderStamp": "1066",
+      "defVal": "0"
+    },
+    {
+      "name":"shutdownSignal",
+      "id": "1085",
+      "senderStamp": "1067",
+      "defVal": "0"
+    },
+    {
+      "name":"brakeDutyCycle",
+      "id": "1087",
+      "senderStamp": "1341",
+      "defVal": "0"
+    },
+    {
+      "name":"blueAssi",
+      "id": "1087",
+      "senderStamp": "1300",
+      "defVal": "0"
+    },
+    {
+      "name":"greenAssi",
+      "id": "1087",
+      "senderStamp": "1321",
+      "defVal": "0"
+    },
+    {
+      "name":"redAssi",
+      "id": "1087",
+      "senderStamp": "1320",
+      "defVal": "0"
+    },
+    {
+      "name":"steeringDutycycle",
+      "id": "1087",
+      "senderStamp": "1340",
+      "defVal": "0"
+    },
+    {
+      "name":"rackRight",
+      "id": "1085",
+      "senderStamp": "1046",
+      "defVal": "0"
+    },
+    {
+      "name":"steerSpeed",
+      "id": "1087",
+      "senderStamp": "1340",
+      "defVal": "0"
+    },
+    {
+      "name":"clampSet",
+      "id": "1085",
+      "senderStamp": "1065",
+      "defVal": "0"
+    },
+    {
+      "name":"serviceBrakeValve",
+      "id": "1085",
+      "senderStamp": "1069",
+      "defVal": "0"
+    }
+    ]
+  }
+ 

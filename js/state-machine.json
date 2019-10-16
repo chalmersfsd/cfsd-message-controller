@@ -1,0 +1,136 @@
+{
+    "msgSets":[{
+      "name":"resStatus",
+      "id": "1040",
+      "senderStamp": "1801",
+      "defVal": "0"
+    },
+    {
+      "name":"resEStop",
+      "id": "1040",
+      "senderStamp": "1802",
+      "defVal": "0"
+    },
+    {
+      "name":"resButtons",
+      "id": "1040",
+      "senderStamp": "1804",
+      "defVal": "0"
+    },
+    {
+      "name":"asMission",
+      "id": "1040",
+      "senderStamp": "1906",
+      "defVal": "0"
+    },
+    {
+      "name":"steeringPosition",
+      "id": "1045",
+      "senderStamp": "1200",
+      "defVal": "0"
+    },
+    {
+      "name":"rackPosition",
+      "id": "1045",
+      "senderStamp": "1206",
+      "defVal": "0"
+    },
+    {
+      "name":"pressureService",
+      "id": "1034",
+      "senderStamp": "1202",
+      "defVal": "0"
+    },
+    {
+      "name":"pressureRegulator",
+      "id": "1034",
+      "senderStamp": "1205",
+      "defVal": "0"
+    },
+    {
+      "name":"pressureEBSLine",
+      "id": "1034",
+      "senderStamp": "1201",
+      "defVal": "0"
+    },
+    {
+      "name":"pressureEBSAct",
+      "id": "1034",
+      "senderStamp": "1203",
+      "defVal": "0"
+    },
+    {
+      "name":"SteeringRequest",
+      "id": "1090",
+      "senderStamp": "314",
+      "defVal": "0"
+    },
+    {
+      "name":"asms",
+      "id": "1040",
+      "senderStamp": "1115",
+      "defVal": "0"
+    },
+    {
+      "name":"ebsOk",
+      "id": "1040",
+      "senderStamp": "1049",
+      "defVal": "0"
+    },
+    {
+      "name":"ebsSound",
+      "id": "1085",
+      "senderStamp": "1044",
+      "defVal": "0"
+    },
+    {
+      "name":"clampExtended",
+      "id": "1040",
+      "senderStamp": "1112",
+      "defVal": "0"
+    },
+    {
+      "name":"clampSet",
+      "id": "1085",
+      "senderStamp": "1065",
+      "defVal": "0"
+    },
+    {
+      "name":"rackRight",
+      "id": "1085",
+      "senderStamp": "1046",
+      "defVal": "0"
+    },
+    {
+      "name":"steerSpeed",
+      "id": "1087",
+      "senderStamp": "1340",
+      "defVal": "0"
+    },
+    {
+      "name":"finishSignal",
+      "id": "1040",
+      "senderStamp": "1403",
+      "defVal": "0"
+    },
+    {
+      "name":"serviceBrakeValve",
+      "id": "1085",
+      "senderStamp": "1069",
+      "defVal": "0"
+    },
+    {
+      "name":"serviceBrake",
+      "id": "1087",
+      "senderStamp": "1341",
+      "defVal": "0"
+    },
+    {
+      "name":"compressor",
+      "id": "1085",
+      "senderStamp": "1045",
+      "defVal": "0"
+    }
+    ]
+  }
+  
