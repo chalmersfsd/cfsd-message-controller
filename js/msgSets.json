@@ -154,16 +154,54 @@
       "id": "1034",
       "senderStamp": "1203",
       "defVal": "0"
-    },{
+    },
+    {
       "name":"SteeringRequest",
       "id": "1090",
       "senderStamp": "1203",
       "defVal": "0"
-    },{
+    },
+    {
       "name":"AimPoint",
       "id": "1172",
-      "senderStamp": "2222",
+      "senderStamp": "2701",
       "defVal": "0.0|0.0|0.0"
+    },
+    {
+      "name":"ebsSpeaker",
+      "id": "1085",
+      "senderStamp": "1044",
+      "defVal": "0"
+    },
+    {
+      "name":"asFinished",
+      "id": "1085",
+      "senderStamp": "1066",
+      "defVal": "0"
+    },
+    {
+      "name":"ebsRelief",
+      "id": "1085",
+      "senderStamp": "1061",
+      "defVal": "0"
+    },
+    {
+      "name":"asms",
+      "id": "1040",
+      "senderStamp": "1115",
+      "defVal": "0"
+    },
+    {
+      "name":"ebsOk",
+      "id": "1040",
+      "senderStamp": "1099",
+      "defVal": "0"
+    },
+    {
+      "name":"torqueRequest",
+      "id": "2010",
+      "senderStamp": "2101",
+      "defVal": "-200|-2400"
     }
     ]
   }
